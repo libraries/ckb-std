@@ -29,6 +29,7 @@ fn main() {
 fn setup_compiler_flags(build: &mut cc::Build) {
     build
         .static_flag(true)
+        .flag("-O3")
         .flag("-fno-builtin-printf")
         .flag("-fno-builtin-memcmp")
         .flag("-nostdinc")
@@ -58,16 +59,16 @@ fn setup_compiler_flags(build: &mut cc::Build) {
             .flag("--target=riscv64")
             .flag("-march=rv64imc_zba_zbb_zbc_zbs");
 
-        if env::var("DEBUG").map(|v| v != "false").unwrap_or(false) {
-            build.flag("-g").flag("-fno-omit-frame-pointer");
-        }
+        // if env::var("DEBUG").map(|v| v != "false").unwrap_or(false) {
+        //     build.flag("-g").flag("-fno-omit-frame-pointer");
+        // }
 
-        let opt_level = env::var("OPT_LEVEL").expect("fetching OPT_LEVEL");
-        if opt_level == "z" {
-            build.flag("-Os");
-        } else {
-            build.flag(&format!("-O{}", opt_level));
-        }
+        // let opt_level = env::var("OPT_LEVEL").expect("fetching OPT_LEVEL");
+        // if opt_level == "z" {
+        //     build.flag("-Os");
+        // } else {
+        //     build.flag(&format!("-O{}", opt_level));
+        // }
     } else if compiler.is_like_gnu() {
         build
             .flag("-nostartfiles")
