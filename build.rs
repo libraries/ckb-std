@@ -70,6 +70,7 @@ fn setup_compiler_flags(build: &mut cc::Build) {
         }
     } else if compiler.is_like_gnu() {
         build
+            .flag("-O3")
             .flag("-nostartfiles")
             .flag("-Wno-dangling-pointer")
             .flag("-Wno-nonnull-compare");
