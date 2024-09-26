@@ -45,3 +45,9 @@ log = { version = "0.4", optional = true, default-features = false }
 [workspace]
 exclude = ["test"]
 resolver = "2"
+
+[profile.release]
+overflow-checks = true
+opt-level = 's'
+lto = true
+codegen-units = 1
